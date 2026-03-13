@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'theme/logging_theme_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 import 'logging.dart';
 import 'logging_user_log_store.dart';
+import 'theme/logging_theme_extension.dart';
 
 class LoggingUserLogView extends ConsumerWidget {
   static final log = Logging.create(LoggingUserLogView, level: Level.all);
-  const LoggingUserLogView({super.key,});
-
+  const LoggingUserLogView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
