@@ -13,5 +13,3 @@ analyzer:
     - '**/*.g.dart'
     - '**/*.mocks.dart'
     - '**/firebase_options.dart'
-    - junk/
-    - hold/
