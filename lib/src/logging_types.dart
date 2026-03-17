@@ -1,7 +1,7 @@
 import 'package:logger/logger.dart';
 
-import 'theme/logging_color_style.dart';
 import 'logging_printers.dart';
+import 'theme/logging_color_style.dart';
 
 typedef LogFunction = void Function(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
 
@@ -20,10 +20,15 @@ typedef PrinterFactory = LogPrinter Function(String, LoggingColorStyle);
 
 mixin LogFunctions {
   void f(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
+
   void e(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
+
   void w(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
+
   void i(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
+
   void d(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
+
   void t(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace});
 }
 

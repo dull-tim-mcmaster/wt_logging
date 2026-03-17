@@ -8,6 +8,7 @@ import 'theme/logging_theme_extension.dart';
 
 class LoggingUserLogView extends ConsumerWidget {
   static final log = Logging.create(LoggingUserLogView, level: Level.all);
+
   const LoggingUserLogView({super.key});
 
   @override

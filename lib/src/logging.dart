@@ -8,8 +8,7 @@ import 'theme/logging_theme_extension.dart';
 class Logging with LogFunctions {
   static final log = Logging.create(Logging, level: Level.debug);
 
-  static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+  static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   static final logLevelMap = <Type, Level>{};
 
@@ -22,19 +21,16 @@ class Logging with LogFunctions {
 
   Logging._(this._logger, this._level, this.className);
 
-  factory Logging.create(dynamic prefix,
-      {Level level = Level.warning,
-      PrinterTypes printerType = PrinterTypes.color}) {
+  factory Logging.create(dynamic prefix, {Level level = Level.warning, PrinterTypes printerType = PrinterTypes.color}) {
     final className = prefix.toString().split('<')[0];
-    final logger = Logger(
-        printer: printerType.createPrinter(className, _theme.style),
-        level: level);
+    final logger = Logger(printer: printerType.createPrinter(className, _theme.style), level: level);
     return Logging._(logger, level, className);
   }
 
-  static void configure(LoggingThemeData theme) {
+  static Logging configure(LoggingThemeData theme, {String appName = 'Main App', Level level = Level.all}) {
     log.i('Reconfiguring logging theme.');
     _theme = theme;
+    return Logging.create(appName, level: level);
   }
 
   @override
@@ -47,21 +43,15 @@ class Logging with LogFunctions {
     snackBar = false,
     bool banner = false,
   }) {
-    _log(
-        LogEvent(Level.fatal, message,
-            time: time, error: error, stackTrace: stackTrace),
-        _logger.f);
+    _log(LogEvent(Level.fatal, message, time: time, error: error, stackTrace: stackTrace), _logger.f);
     if (userLog) {
-      _userLog(message,
-          error: error, stackTrace: stackTrace, level: Level.fatal);
+      _userLog(message, error: error, stackTrace: stackTrace, level: Level.fatal);
     }
     if (snackBar) {
-      _snackBar(message,
-          error: error, stackTrace: stackTrace, level: Level.fatal);
+      _snackBar(message, error: error, stackTrace: stackTrace, level: Level.fatal);
     }
     if (banner) {
-      _banner(message,
-          error: error, stackTrace: stackTrace, level: Level.fatal);
+      _banner(message, error: error, stackTrace: stackTrace, level: Level.fatal);
     }
   }
 
@@ -75,21 +65,15 @@ class Logging with LogFunctions {
     snackBar = false,
     bool banner = false,
   }) {
-    _log(
-        LogEvent(Level.error, message,
-            time: time, error: error, stackTrace: stackTrace),
-        _logger.e);
+    _log(LogEvent(Level.error, message, time: time, error: error, stackTrace: stackTrace), _logger.e);
     if (userLog) {
-      _userLog(message,
-          error: error, stackTrace: stackTrace, level: Level.error);
+      _userLog(message, error: error, stackTrace: stackTrace, level: Level.error);
     }
     if (snackBar) {
-      _snackBar(message,
-          error: error, stackTrace: stackTrace, level: Level.error);
+      _snackBar(message, error: error, stackTrace: stackTrace, level: Level.error);
     }
     if (banner) {
-      _banner(message,
-          error: error, stackTrace: stackTrace, level: Level.error);
+      _banner(message, error: error, stackTrace: stackTrace, level: Level.error);
     }
   }
 
@@ -103,21 +87,15 @@ class Logging with LogFunctions {
     snackBar = false,
     bool banner = false,
   }) {
-    _log(
-        LogEvent(Level.warning, message,
-            time: time, error: error, stackTrace: stackTrace),
-        _logger.w);
+    _log(LogEvent(Level.warning, message, time: time, error: error, stackTrace: stackTrace), _logger.w);
     if (userLog) {
-      _userLog(message,
-          error: error, stackTrace: stackTrace, level: Level.warning);
+      _userLog(message, error: error, stackTrace: stackTrace, level: Level.warning);
     }
     if (snackBar) {
-      _snackBar(message,
-          error: error, stackTrace: stackTrace, level: Level.warning);
+      _snackBar(message, error: error, stackTrace: stackTrace, level: Level.warning);
     }
     if (banner) {
-      _banner(message,
-          error: error, stackTrace: stackTrace, level: Level.warning);
+      _banner(message, error: error, stackTrace: stackTrace, level: Level.warning);
     }
   }
 
@@ -131,17 +109,12 @@ class Logging with LogFunctions {
     snackBar = false,
     bool banner = false,
   }) {
-    _log(
-        LogEvent(Level.info, message,
-            time: time, error: error, stackTrace: stackTrace),
-        _logger.i);
+    _log(LogEvent(Level.info, message, time: time, error: error, stackTrace: stackTrace), _logger.i);
     if (userLog) {
-      _userLog(message,
-          error: error, stackTrace: stackTrace, level: Level.info);
+      _userLog(message, error: error, stackTrace: stackTrace, level: Level.info);
     }
     if (snackBar) {
-      _snackBar(message,
-          error: error, stackTrace: stackTrace, level: Level.info);
+      _snackBar(message, error: error, stackTrace: stackTrace, level: Level.info);
     }
     if (banner) {
       _banner(message, error: error, stackTrace: stackTrace, level: Level.info);
@@ -158,21 +131,15 @@ class Logging with LogFunctions {
     snackBar = false,
     bool banner = false,
   }) {
-    _log(
-        LogEvent(Level.debug, message,
-            time: time, error: error, stackTrace: stackTrace),
-        _logger.d);
+    _log(LogEvent(Level.debug, message, time: time, error: error, stackTrace: stackTrace), _logger.d);
     if (userLog) {
-      _userLog(message,
-          error: error, stackTrace: stackTrace, level: Level.debug);
+      _userLog(message, error: error, stackTrace: stackTrace, level: Level.debug);
     }
     if (snackBar) {
-      _snackBar(message,
-          error: error, stackTrace: stackTrace, level: Level.debug);
+      _snackBar(message, error: error, stackTrace: stackTrace, level: Level.debug);
     }
     if (banner) {
-      _banner(message,
-          error: error, stackTrace: stackTrace, level: Level.debug);
+      _banner(message, error: error, stackTrace: stackTrace, level: Level.debug);
     }
   }
 
@@ -186,36 +153,27 @@ class Logging with LogFunctions {
     snackBar = false,
     bool banner = false,
   }) {
-    _log(
-        LogEvent(Level.trace, message,
-            time: time, error: error, stackTrace: stackTrace),
-        _logger.t);
+    _log(LogEvent(Level.trace, message, time: time, error: error, stackTrace: stackTrace), _logger.t);
     if (userLog) {
-      _userLog(message,
-          error: error, stackTrace: stackTrace, level: Level.trace);
+      _userLog(message, error: error, stackTrace: stackTrace, level: Level.trace);
     }
     if (snackBar) {
-      _snackBar(message,
-          error: error, stackTrace: stackTrace, level: Level.trace);
+      _snackBar(message, error: error, stackTrace: stackTrace, level: Level.trace);
     }
     if (banner) {
-      _banner(message,
-          error: error, stackTrace: stackTrace, level: Level.trace);
+      _banner(message, error: error, stackTrace: stackTrace, level: Level.trace);
     }
   }
 
   void _log(LogEvent event, LogFunction logFunction) {
-    final messageString = '${event.message}'
+    final messageString =
+        '${event.message}'
         '${event.error == null ? '' : 'ERROR(${event.error})'}'
         '${event.stackTrace == null ? '' : 'STACKTRACE(${event.stackTrace})'}';
     logFunction(messageString);
   }
 
-  void _userLog(dynamic message,
-      {DateTime? time,
-      Object? error,
-      StackTrace? stackTrace,
-      Level level = Level.info}) {
+  void _userLog(dynamic message, {DateTime? time, Object? error, StackTrace? stackTrace, Level level = Level.info}) {
     if (level.value >= _level.value) {
       LoggingUserLogStore.log(
         UserLogEntry(
@@ -230,12 +188,12 @@ class Logging with LogFunctions {
     }
   }
 
-  void _snackBar(dynamic message,
-      {Object? error, StackTrace? stackTrace, Level level = Level.info}) {
+  void _snackBar(dynamic message, {Object? error, StackTrace? stackTrace, Level level = Level.info}) {
     final config = _theme;
     if (level.value >= config.minLevel.value) {
       final style = _theme.style.forLevel(level);
-      final messageString = '$message'
+      final messageString =
+          '$message'
           '${error == null ? '' : 'ERROR($error)'}'
           '${stackTrace == null ? '' : 'STACKTRACE($stackTrace)'}';
 
@@ -255,13 +213,13 @@ class Logging with LogFunctions {
     }
   }
 
-  void _banner(dynamic message,
-      {Object? error, StackTrace? stackTrace, Level level = Level.info}) {
+  void _banner(dynamic message, {Object? error, StackTrace? stackTrace, Level level = Level.info}) {
     final config = _theme;
     if (level.value >= config.minLevel.value) {
       final style = config.style.forLevel(level);
 
-      final messageString = '$message'
+      final messageString =
+          '$message'
           '${error == null ? '' : 'ERROR($error)'}'
           '${stackTrace == null ? '' : 'STACKTRACE($stackTrace)'}';
 
@@ -294,7 +252,5 @@ class Logging with LogFunctions {
   }
 }
 
-Logging logger(dynamic prefix,
-        {Level level = Level.warning,
-        PrinterTypes printerType = PrinterTypes.color}) =>
+Logging logger(dynamic prefix, {Level level = Level.warning, PrinterTypes printerType = PrinterTypes.color}) =>
     Logging.create(prefix, level: level, printerType: printerType);
